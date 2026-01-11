@@ -1,0 +1,71 @@
+{
+  "description": "LG TV Controls (with Passthrough)",
+  "manipulators": [
+    {
+      "type": "basic",
+      "from": {
+        "consumer_key_code": "volume_increment",
+        "modifiers": { "optional": ["any"] }
+      },
+      "to": [
+        { "shell_command": "/bin/echo 'volume_up' > /tmp/lgtv-pipe" },
+        { "consumer_key_code": "volume_increment" }
+      ]
+    },
+    {
+      "type": "basic",
+      "from": {
+        "key_code": "f12",
+        "modifiers": { "optional": ["any"] }
+      },
+      "to": [
+        { "shell_command": "/bin/echo 'volume_up' > /tmp/lgtv-pipe" },
+        { "consumer_key_code": "volume_increment" }
+      ]
+    },
+    {
+      "type": "basic",
+      "from": {
+        "consumer_key_code": "volume_decrement",
+        "modifiers": { "optional": ["any"] }
+      },
+      "to": [
+        { "shell_command": "/bin/echo 'volume_down' > /tmp/lgtv-pipe" },
+        { "consumer_key_code": "volume_decrement" }
+      ]
+    },
+    {
+      "type": "basic",
+      "from": {
+        "key_code": "f11",
+        "modifiers": { "optional": ["any"] }
+      },
+      "to": [
+        { "shell_command": "/bin/echo 'volume_down' > /tmp/lgtv-pipe" },
+        { "consumer_key_code": "volume_decrement" }
+      ]
+    },
+    {
+      "type": "basic",
+      "from": {
+        "consumer_key_code": "mute",
+        "modifiers": { "optional": ["any"] }
+      },
+      "to": [
+        { "shell_command": "/bin/echo 'mute' > /tmp/lgtv-pipe" },
+        { "consumer_key_code": "mute" }
+      ]
+    },
+    {
+      "type": "basic",
+      "from": {
+        "key_code": "f10",
+        "modifiers": { "optional": ["any"] }
+      },
+      "to": [
+        { "shell_command": "/bin/echo 'mute' > /tmp/lgtv-pipe" },
+        { "consumer_key_code": "mute" }
+      ]
+    }
+  ]
+}
