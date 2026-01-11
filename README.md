@@ -10,8 +10,6 @@ A blazing fast Rust application that allows you to control your LG TV volume usi
 -   **No Lag**: Uses a Named Pipe (FIFO) for instant command delivery from Karabiner.
 -   **Background Service**: Runs silently in the background on startup.
 
-> **Security Note**: This application requires your TV's MAC address to be set in an environment variable (`LGTV_MAC`) to avoid hardcoding sensitive network information in the source code.
-
 ## Prerequisites
 -   **Rust**: [Install Rust](https://www.rust-lang.org/tools/install)
 -   **Karabiner-Elements**: [Install Karabiner](https://karabiner-elements.pqrs.org/)
@@ -45,12 +43,11 @@ cp get_audio_device ~/.local/bin/
 ### 3. Setup Startup Service
 To have the controller run automatically when you log in:
 
-1.  **Configure the MAC Address**: Open `com.user.lgtv.plist` and replace the `LGTV_MAC` value with your TV's actual MAC address (e.g., `3C:F0:83:9E:6A:2C`).
-2.  Copy the plist file to your LaunchAgents folder:
+1.  Copy the plist file to your LaunchAgents folder:
     ```bash
     cp com.user.lgtv.plist ~/Library/LaunchAgents/
     ```
-3.  Load the service:
+2.  Load the service:
     ```bash
     launchctl load ~/Library/LaunchAgents/com.user.lgtv.plist
     ```

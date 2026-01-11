@@ -30,6 +30,9 @@ const PIPE_PATH: &str = "/tmp/lgtv-pipe";
 // The name reported by CoreAudio for the LG TV when used as an audio sink.
 const TARGET_AUDIO_DEVICE: &str = "LG Monitor";
 
+// The MAC address of your LG TV.
+const TARGET_MAC: &str = "3C:F0:83:9E:6A:2C";
+
 type ClientType = WebosClient<SplitSink<WebSocketStream<MaybeTlsStream<TcpStream>>, Message>>;
 
 fn map_client_error<E: std::fmt::Debug>(e: E) -> Box<dyn std::error::Error> {
@@ -38,10 +41,9 @@ fn map_client_error<E: std::fmt::Debug>(e: E) -> Box<dyn std::error::Error> {
 
 /// Resolves the IP address of the LG TV using its MAC address.
 fn resolve_ip_from_mac() -> Option<String> {
-    let target_mac = std::env::var("LGTV_MAC").ok()?;
     let output = Command::new("arp").arg("-an").output().ok()?;
     let output_str = String::from_utf8_lossy(&output.stdout);
-    let normalized_target = target_mac.to_lowercase();
+    let normalized_target = TARGET_MAC.to_lowercase();
     let re = Regex::new(r"\(([^)]+)\) at ([0-9a-f:]+)").ok()?;
 
     for line in output_str.lines() {
