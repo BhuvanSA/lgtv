@@ -68,3 +68,5 @@ Simply press your volume keys!
 ## Troubleshooting
 -   **Logs**: Check the service logs at `/tmp/lgtv.log` and `/tmp/lgtv.err`. 
 -   **Reconnection**: If you turned off the TV, the service might take up to 5 seconds to detect it's back on the network and reconnect.
+
+## Vibe Coded the Entire thing
