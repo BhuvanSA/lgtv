@@ -132,9 +132,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         if client.is_none() {
              if let Some(ip) = resolve_ip_from_mac() {
                 let key_path = home_dir().expect("Cannot find home").join(".lgtv_key");
-                let key = if key_path.exists() {
+                let mut key = if key_path.exists() {
                     tokio::fs::read_to_string(&key_path).await.ok().map(|k| k.trim().to_string())
                 } else { None };
+
+                // Extract key from JSON if needed
+                if let Some(ref k) = key {
+                    if let Ok(v) = serde_json::from_str::<serde_json::Value>(k) {
+                        if let Some(ck) = v.get("client-key").and_then(|v| v.as_str()) {
+                            key = Some(ck.to_string());
+                        }
+                    }
+                }
 
                 let url = format!("ws://{}:3000/", ip);
                 let config = WebOsClientConfig::new(&url, key.clone());
